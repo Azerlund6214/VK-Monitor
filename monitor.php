@@ -98,8 +98,11 @@ for ( $i = 0 ;  ; $i++ )
     echo " # Views=" , print_r( $current_views );
     echo " # DTime=" , $date_time_now;
 
-    $sql = "INSERT INTO mon_results ( post_url    , count_likes      , count_views )
-                           VALUES(  '$post_url' , '$current_likes' , '$current_views' )";
+    $Current_iteration = $DBC -> Query( "SELECT current_iteration FROM curent_states WHERE post_url = '$post_url'" )[0][0];
+
+
+    $sql = "INSERT INTO mon_results ( post_url ,      iteration        , count_likes      , count_views )
+                           VALUES(  '$post_url' , $Current_iteration , '$current_likes' , '$current_views' )";
     $DBC -> Exec( $sql );
 
 
