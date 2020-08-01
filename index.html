@@ -97,7 +97,7 @@
 
 			}
 			
-			#form_buttons div input[type=text]
+			#textinput_url
 			{
 				padding-inline-start: 30px;
 				
@@ -106,7 +106,16 @@
 				
 				border-radius: 20px;
 			}
-			
+
+			#textinput_interval
+			{
+				padding-inline-start: 24px;
+				width: 5%;
+				height: 45px;
+
+				border-radius: 20px;
+			}
+
 			#form_buttons div input[type=submit]
 			{
 			
@@ -188,14 +197,16 @@
 					<div class="col-12 m-auto ">
 					
 								<!-- Text input-->
-								<input id="textinput" name="url_for_add" type="text"
+								<input id="textinput_url" name="url_for_add" type="text"
 											placeholder="123" size="80"
-											value="https://vk.com/wall-"
-											>
-								
+											value="https://vk.com/wall-" >
+
+								<input id="textinput_interval" name="rescan_interval" type="text"
+									   placeholder="30" size="20"
+									   value="30" >
+
 								<!-- Кнопка -->
 								<input type="submit" value="Добавить"/>
-								секция добавки нового поста на монитор - потом добавить еще и другие параметры
 					</div>
 				</div>
 				<!-- /Кнопка -->

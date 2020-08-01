@@ -19,6 +19,7 @@
         exit("Нет get параметра url_for_add");
 
     $url = $_POST['url_for_add'];
+    $rescan = $_POST['rescan_interval'];
 
     #####
 
@@ -40,8 +41,8 @@
 
 
 
-    $sql = "INSERT INTO curent_states ( post_url )
-                    VALUES(  '".$url."' )";
+    $sql = "INSERT INTO curent_states ( post_url , update_interval )
+                    VALUES(  '$url' , $rescan )";
     # TODO: Тут дыра в безопасности
 
 
