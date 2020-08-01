@@ -83,9 +83,9 @@
                               '">';
             echo 	"</td>";
 
-            echo 	"<td>"
-
-                ."</td>";
+            echo 	'<td>
+                        <a target="_blank" href="/monitor.php?url_for_mon='.$One_Set[1].'">Запустить</a>
+                    </td>';
 
             echo "</tr>";
         }

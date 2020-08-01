@@ -4,7 +4,7 @@
 
 
 
-    set_time_limit(0);
+    set_time_limit(40);
 
 
 
@@ -72,7 +72,7 @@
 for ( $i = 0 ;  ; $i++ )
 {
     echo "<br>Начало круга -> $i ===> ";
-
+    ob_end_flush();
     //file_put_contents( "12345.html" , file_get_contents($post_url) ); exit;
 
     ### SHD
@@ -86,27 +86,39 @@ for ( $i = 0 ;  ; $i++ )
 
     unset( $SHD_html );
 
-    echo "<pre>Likes="; print_r( $current_likes ); echo "</pre>";
-    echo "<pre>Views="; print_r( $current_views ); echo "</pre>";
-
-    # id   ссылка   тек_датавремя  лайков  просм
-
-
-
-    //write_in_file( $target_file_name , $final_text );
     #TODO: Проверка на непустые значения
     #TODO: Проверка что страница нормально распарсилась
     #TODO: Проверка что пришла страница с постом, а не с капчей
 
-    $sql = "INSERT INTO mon_results ( post_url , count_likes , count_views )
-                    VALUES(  '$post_url' , '$current_likes' , '$current_views' )";
+
+
+
+    $date_time_now = date("Y-m-d H:i:s");
+    echo " Likes=" , print_r( $current_likes );
+    echo " # Views=" , print_r( $current_views );
+    echo " # DTime=" , $date_time_now;
+
+    $sql = "INSERT INTO mon_results ( post_url    , count_likes      , count_views )
+                           VALUES(  '$post_url' , '$current_likes' , '$current_views' )";
     $DBC -> Exec( $sql );
 
-    # Обновление всей гл таблицы
 
 
 
-    exit( "<hr>Exit" );
+    $memory_used = round(SF::Memory_Usage_EchoGet("M","Get"),2 )."Mb";
+
+    # Обновление всей главной таблицы
+    $sql = "UPDATE curent_states SET 
+                datetime_mon_last_update = '$date_time_now', 
+                memory_used = '$memory_used' ,
+                current_iteration=current_iteration+1
+            WHERE
+                post_url = '$post_url' ";
+    $DBC -> Exec( $sql );
+
+    //$DBC -> Get_error();
+
+    //exit( "<hr>Exit" );
 
     echo " ===> Сплю $sleep_time секунд";
 
