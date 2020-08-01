@@ -51,7 +51,7 @@
 							<td><strong>Последнее обн.</strong></td>
 							<td><strong>Память</strong></td>
 							<td><strong>Итерация</strong></td>
-							<td><strong>Включить</strong></td>
+							<td><strong>Зупустить</strong></td>
 							<td><strong>Подробнее</strong></td>
 						</tr>
 					</thead>
@@ -74,18 +74,20 @@
 
 
 
+            echo 	'<td>
+                        <a target="_blank" href="/monitor.php?url_for_mon='.$One_Set[1].'">Запустить</a>
+                    </td>';
+
             echo 	"<td>";
             echo    '<input 
                             type="button"
-                            value="Запуск"
+                            value="Вывести"
                             onclick="'.
                               "Exec_AJAX( 'monitor.php?url_for_mon=". $One_Set[1] ."' , '' , '#div_result' )".
                               '">';
             echo 	"</td>";
 
-            echo 	'<td>
-                        <a target="_blank" href="/monitor.php?url_for_mon='.$One_Set[1].'">Запустить</a>
-                    </td>';
+
 
             echo "</tr>";
         }

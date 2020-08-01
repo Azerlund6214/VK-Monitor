@@ -4,7 +4,7 @@
 
 
 
-    set_time_limit(40);
+    set_time_limit(0);
 
 
 
@@ -68,11 +68,27 @@
 
 
 
+echo '  <link rel="stylesheet" type="text/css" href="table_style.css">
+        <table border=2px class="result_table">
+					<thead>
+						<tr >
+							<td><strong>Начало круга</strong></td>
+							<td><strong>Время</strong></td>
+							<td><strong>Просмотров</strong></td>
+							<td><strong>Лайков</strong></td>
+							<td><strong>Итерация</strong></td>
+							<td><strong>Сейчас сплю</strong></td>
+						</tr>
+					</thead>
+					<tbody>
+					';
+
 
 for ( $i = 0 ;  ; $i++ )
 {
-    echo "<br>Начало круга -> $i ===> ";
-    ob_end_flush();
+    echo "<tr>";
+    echo 	"<td>". $i ."</td>";
+
     //file_put_contents( "12345.html" , file_get_contents($post_url) ); exit;
 
     ### SHD
@@ -94,16 +110,17 @@ for ( $i = 0 ;  ; $i++ )
 
 
     $date_time_now = date("Y-m-d H:i:s");
-    echo " Likes=" , print_r( $current_likes );
-    echo " # Views=" , print_r( $current_views );
-    echo " # DTime=" , $date_time_now;
-
     $Current_iteration = $DBC -> Query( "SELECT current_iteration FROM curent_states WHERE post_url = '$post_url'" )[0][0];
 
+    echo 	"<td>". $date_time_now ."</td>";
+    echo 	"<td>". $current_views ."</td>";
+    echo 	"<td>". $current_likes ."</td>";
+    echo 	"<td>". $Current_iteration ."</td>";
 
     $sql = "INSERT INTO mon_results ( post_url ,      iteration        , count_likes      , count_views )
                            VALUES(  '$post_url' , $Current_iteration , '$current_likes' , '$current_views' )";
     $DBC -> Exec( $sql );
+
 
 
 
@@ -123,7 +140,9 @@ for ( $i = 0 ;  ; $i++ )
 
     //exit( "<hr>Exit" );
 
-    echo " ===> Сплю $sleep_time секунд";
+    echo 	"<td>". $sleep_time ."сек</td>";
+    echo "</tr>";
+
 
     sleep($sleep_time);
 
