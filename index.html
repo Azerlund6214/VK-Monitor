@@ -1,0 +1,403 @@
+﻿<!DOCTYPE html>
+
+
+<html lang="ru">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <title>VK-Monitor</title>
+		
+		<!-- *** BOOTSTRAP CDN *** -->
+		<!-- Оптимизация = Предвыбор DNS + Предподключение к облаку -->
+		<link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+		<link rel="preconnect" href="https://cdnjs.cloudflare.com/" crossorigin>
+		
+		
+		<!-- Для просмотра с моб устройств -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		
+		<!-- Главный CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css">
+		
+		<!-- Notice: jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/popper.min.js"></script>
+		<script src = "https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+		<!-- *** BOOTSTRAP CDN *** -->
+		
+		
+        <!-- 
+			<link href="1.css" rel="stylesheet" type="text/css">
+		-->
+			
+    </head>
+	
+
+	<body>
+	
+		<style>
+		#central-wrapper 
+		{ 
+			/* Основное содержание */
+			background: #e3e8cc; /* Цвет фона */
+			border: solid 1px black; /* Параметры рамки */
+			/* margin-left: 17%; /* Отступ слева с учетом ширины левой колонки */
+			
+			/*width: 80%; /* Ширина */
+			/*height: 100vh; /* 100vh - 100% от высоты viewport(окна браузера) */
+			
+			width:  66vw;	
+			height: 50vh;
+			
+			
+			
+			/*min-height: 80vh;
+			/* vh (высота видового экрана), 
+			   vw (ширина окна просмотра), 
+			   vmin (минимальная длина окна просмотра)
+			   vmax (максимальная длина окна просмотра) */
+			   
+			/* height: auto; /* Авто высота(под контент)*/
+			
+			margin: auto; /* Автовыравнивание по центру */
+			
+			/* margin-bottom: 5px; /* Отступ снизу */
+			
+			
+			
+		}
+		
+
+		
+		</style>
+		
+		<style>
+			
+			#banner
+			{
+				background-color: #b2e8a3;
+			
+				height: 25vh;
+			
+			
+			}
+			
+			
+			
+			#form_buttons
+			{
+				background-color: #e8b3a3;
+				
+				height: 15vh;
+				//min-height: 100px;
+
+			}
+			
+			#form_buttons div input[type=text]
+			{
+				padding-inline-start: 30px;
+				
+				width: 50%;
+				height: 45px;
+				
+				border-radius: 20px;
+			}
+			
+			#form_buttons div input[type=submit]
+			{
+			
+				height: 45px;
+			
+				border-radius: 15px;
+			
+			}
+			
+			
+			
+			
+			
+			
+			#checkboxes
+			{
+				background-color: #a7a3e8;
+				
+				height: 30vh;
+				
+			}
+			
+			
+			
+			
+			
+			#result_row
+			{
+				background-color: #a3e8cc;
+			
+				height: 30vh;
+			
+			}
+			
+			
+			
+			
+			#div_result
+			{
+				/* position: relative; */
+			
+				background: #a3e8aa; /* Цвет фона */
+				/* border: solid 1px black; /* Параметры рамки */
+				
+				width: 90%;
+				height: auto;
+				
+				margin: auto;
+			}
+			
+			
+			
+			
+			
+			
+		</style>
+		
+		
+		
+		
+		<div class="container-fluid">
+			<div  class="row  ">
+				<div id="banner" class="col-12  ">
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- Кнопка и чекбоксы, в двух строках -->
+		<div class="container-fluid">
+		
+		
+			<form method="POST" id="form_get_tbl" action="javascript:void(null);" onsubmit="Exec_AJAX( 'Main_ajax.php' , '#form_get_tbl' , '#div_result' )">
+			<fieldset>
+				
+				<!-- Кнопка -->
+				<div id="form_buttons" class="row text-center">
+					<div class="col-12 m-auto ">
+					
+								<!-- Text input-->
+								<input id="textinput" name="url" type="text" 
+											placeholder="https://www.youtube.com/watch?v=JNtw9Cppo8k" size="80"
+											value="https://www.youtube.com/watch?v=JNtw9Cppo8k"
+											>
+								
+								<!-- Кнопка -->
+								<input type="submit" value="Вывести таблицу"/>
+					
+					</div>
+				</div>
+				<!-- /Кнопка -->
+				
+				
+				
+				<!-- Чекбоксы, убрать в выпадающий список -->
+				<div id="checkboxes" class="row  text-center">
+					<div class="col-12  m-auto ">
+						
+							<input type="checkbox" name="cb1_Echo_POST" > Вывести пришедший POST
+						<br><input type="checkbox" name="cb4_Echo_Video_ID" > Вывести извлеченный из URL Video_ID
+						<br><input type="checkbox" name="cb8_Echo_JSON_Erased" > Вывести уже обрезанный JSON
+						<br><input type="checkbox" name="cb9_Echo_FIN_Video_Info_Asoc" checked> FIN = Вывести основные сведения о видео
+						<br><input type="checkbox" name="cb10_Echo_FIN_Video_Thumb_Url_Arr" > FIN = Вывести ссылки на эскизы (превью видео)
+						<br><input type="checkbox" name="cb11_Echo_FIN_Video_Itag_Info_Asoc_FULL" > FIN = Вывести сведения о ВСЕХ ITAG
+						
+					</div>
+				</div>
+				<!-- /Чекбоксы -->
+			
+			
+			</fieldset>
+			</form>
+			
+			
+		</div>
+		
+		
+		
+		
+		
+		<!-- Результаты -->
+		<div class="container-fluid">
+			<div id="result_row" class="row  ">
+				<div class="col-12  ">
+				
+					<div id="div_result">
+							
+							<br>
+							Фронтенд <strong>временный</strong>, набросан по-быстренькому на bootstrap4
+							<br>
+							Нет адаптивности - сайт только для пк. Высоты секций заданы в vh (всего 100vh)
+							<br>
+							Тут будет таблица с рузультатами
+							
+							<hr>
+							Для тестов на отлов ошибок:
+							<br>
+							<a href="">Пост сегодня</a> #
+							<a href="">Пост вчера</a> #
+							<a href="">Пост давно</a> #
+							<br>
+							
+					</div>
+				
+				
+				</div>
+			</div>
+		</div>
+		
+		
+		<style>
+			/* https://www.cssportal.com/html-table-generator/ */
+			/* https://divtable.com/table-styler/ */
+			
+			table.result_table {
+			  border: 2px solid #1C6EA4;
+			  background-color: #EEEEEE;
+			  width: 100%;
+			  text-align: center;
+			  border-collapse: collapse;
+			}
+			
+			
+			table.result_table td, table.result_table th {
+			  border: 1px solid #AAAAAA;
+			  padding: 3px 2px;
+			}
+			table.result_table tbody td {
+			  font-size: 20px;
+			}
+			table.result_table tr:nth-child(even) {
+			  background: #D0E4F5;
+			}
+			
+			
+			table.result_table thead {
+			  font-size: 20px;
+			  background: #1C6EA4;
+			  background: -moz-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+			  background: -webkit-linear-gradient(top, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+			  background: linear-gradient(to bottom, #5592bb 0%, #327cad 66%, #1C6EA4 100%);
+			  border-bottom: 2px solid #444444;
+			}
+			table.result_table thead th {
+			  
+			  font-weight: bold;
+			  color: #FFFFFF;
+			  text-align: center;
+			  border-left: 2px solid #D0E4F5;
+			}
+			table.result_table thead th:first-child {
+			  border-left: none;
+			}
+
+
+		</style>
+		
+		
+		
+
+		
+		<!-- ########################################################################################################### -->
+		
+		<!-- Все по аяксу -->
+		<script type="text/javascript" language="javascript">
+			
+			function Exec_AJAX( path , form_data , div_id )
+			{
+				$.ajax({  type: 'POST',
+						  url: path,
+						  data: $( form_data ).serialize(),
+						  success: function(data) { $( div_id ).html(data); },
+						  error:   function(xhr, str){ alert('Возникла ошибка: ' + xhr.responseCode); }				});
+			}
+			
+		</script>
+		
+		
+		<!-- ########################################################################################################### -->
+		
+		
+		
+		
+		
+		<!--
+		<div class="download-table">
+				<table>
+					<thead>
+						<tr class="w2">
+							<td><strong>Название</strong></td>
+							<td><strong>Платформа</strong></td>
+							<td><strong>Разрядность</strong></td>
+							<td><strong>Русская версия</strong></td>
+							<td><strong>Формат</strong></td>
+							<td><strong>Загрузка</strong></td>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Microsoft Word 2016</td>
+							<td>Windows 10</td>
+							<td>32Bit / 64Bit</td>
+							<td><i class="fa fa-check"></i></td>
+							<td>.exe</td>
+							<td>
+								<a class="" target="_blank" href=""><i class="fa fa-hdd-o"></i> <span>Скачать</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>Microsoft Word 2016</td>
+							<td>Windows 8.1</td>
+							<td>32Bit / 64Bit</td>
+							<td><i class="fa fa-check"></i></td>
+							<td>.exe</td>
+							<td>
+								<a class="" target="_blank" href=""><i class="fa fa-hdd-o"></i> <span>Скачать</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>Microsoft Word 2016</td>
+							<td>Windows 7</td>
+							<td>32Bit / 64Bit</td>
+							<td><i class="fa fa-check"></i></td>
+							<td>.exe</td>
+							<td>
+								<a class="" target="_blank" href=""><i class="fa fa-hdd-o"></i> <span>Скачать</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>Microsoft Word 2016</td>
+							<td>Windows&nbsp;XP</td>
+							<td>32Bit / 64Bit</td>
+							<td><i class="fa fa-check"></i></td>
+							<td>.exe</td>
+							<td>
+								<a class="" target="_blank" href=""><i class="fa fa-hdd-o"></i> <span>Скачать</span></a>
+							</td>
+						</tr>
+						<tr>
+							<td>Microsoft Word 2016</td>
+							<td>Windows Vista</td>
+							<td>32Bit / 64Bit</td>
+							<td><i class="fa fa-check"></i></td>
+							<td>.exe</td>
+							<td>
+								<a class="" target="_blank" href=""><i class="fa fa-hdd-o"></i> <span>Скачать</span></a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		-->
+	
+	</body>
+
+</html>

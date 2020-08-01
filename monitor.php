@@ -1,21 +1,27 @@
 <?php
 	
-    //TODO: Написать обработку ? в uri
-    //      Можно добавить статус ссылки - активная и выключенная (дописать "where status=active" в sql)
+    # TODO: сделать статусы у ссылок как в краулере
+    #
+    #
 
+
+    # Выводить таблицу текущих активных. Если их больше 5, то не давать запустить еще один
+    # В таблице в каждой строке сразу кнопки с выховом аякса с гет параметром.
+    # id  ссылка(уник)  статус  интервал_обновления  дата_поста  дата_добавки
+    # datetime_start datetime_last_update  memory_used  current_iteration
 
     #$debug_mode = true; // Выводить все переменные и не делать реальный редирект в конце
     $debug_mode = false;
-
-    $logging_active = true; # Писать ли логи в бд
 
 
     $db_host = '127.0.0.1';
     $db_user = 'root';
     $db_pass = 'root';
-    $db_name = "redirector";
+    $db_name = "vk-monitor";
 
-	
+
+
+
     require_once( "db_controller_mysqli.php" );
     require_once( "SF_CLASS.php" );
 
@@ -28,14 +34,17 @@
 
     #####
 
-    $request_uri = $_SERVER['REQUEST_URI'];
-    #TODO: Тут огромная дыра в безопасности - проверять на SQL-injection
 
-    if ( $request_uri === "/" || $request_uri === "" )
-    {
-        header("Location: " . SF::Get_This_Server_Domain() . "/empty_uri");
-        exit();
-    }
+
+    exit("<hr>Exit");
+
+
+
+
+
+
+
+
     #####
 
     $sql = "SELECT * FROM directions WHERE uri='$request_uri'";
