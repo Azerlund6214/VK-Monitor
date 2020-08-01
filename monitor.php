@@ -89,11 +89,21 @@ for ( $i = 0 ;  ; $i++ )
     echo "<pre>Likes="; print_r( $current_likes ); echo "</pre>";
     echo "<pre>Views="; print_r( $current_views ); echo "</pre>";
 
-
+    # id   ссылка   тек_датавремя  лайков  просм
 
 
 
     //write_in_file( $target_file_name , $final_text );
+    #TODO: Проверка на непустые значения
+    #TODO: Проверка что страница нормально распарсилась
+    #TODO: Проверка что пришла страница с постом, а не с капчей
+
+    $sql = "INSERT INTO mon_results ( post_url , count_likes , count_views )
+                    VALUES(  '$post_url' , '$current_likes' , '$current_views' )";
+    $DBC -> Exec( $sql );
+
+    # Обновление всей гл таблицы
+
 
 
     exit( "<hr>Exit" );
