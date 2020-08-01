@@ -1,23 +1,16 @@
 <?php
 
 
-    ob_implicit_flush(); ### Отключаем SAPI-буфер
-    ob_end_flush();
-
 
 
     #$debug_mode = true; // Выводить все переменные и не делать реальный редирект в конце
     $debug_mode = false;
 
 
-    $db_host = '127.0.0.1';
-    $db_user = 'root';
-    $db_pass = 'root';
-    $db_name = "vk_monitor";
+    include "config.php";
 
-
-    require_once( "db_controller_mysqli.php" );
-    require_once( "SF_CLASS.php" );
+    require_once( "libs/db_controller_mysqli.php" );
+    require_once( "libs/SF_CLASS.php" );
 
     #####
 
@@ -82,9 +75,7 @@
 
 
             echo 	'<td>
-                        <input name="test" type="text" value="https://www.vk.com/123" hidden>
-                        <input type="button" value="Запуск" onsubmit=Exec_AJAX( "monitor.php" , "#form_states_tbl" , "#div_result" )>
-
+                        <input type="button" value="Запуск" onclick="Exec_AJAX( \'monitor.php?url_for_mon='. $One_Set[1] .'\' , \'\' , \'#div_result\' )">
                     </td>';
 
             echo 	"<td>"

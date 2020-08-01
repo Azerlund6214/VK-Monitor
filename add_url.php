@@ -1,23 +1,16 @@
 <?php
 
 
-    ob_implicit_flush(); ### Отключаем SAPI-буфер
-    ob_end_flush();
 
 
 
     $debug_mode = true; // Выводить все переменные и не делать реальный редирект в конце
     #$debug_mode = false;
 
+    include "config.php";
 
-    $db_host = '127.0.0.1';
-    $db_user = 'root';
-    $db_pass = 'root';
-    $db_name = "vk_monitor";
-
-
-    require_once( "db_controller_mysqli.php" );
-    require_once( "SF_CLASS.php" );
+    require_once( "libs/db_controller_mysqli.php" );
+    require_once( "libs/SF_CLASS.php" );
 
 
     #####
