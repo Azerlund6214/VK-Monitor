@@ -51,14 +51,14 @@
 							<td><strong>Последнее обн.</strong></td>
 							<td><strong>Память</strong></td>
 							<td><strong>Итерация</strong></td>
-							<td><strong>Запуск/Пауза</strong></td>
+							<td><strong>Включить</strong></td>
 							<td><strong>Подробнее</strong></td>
 						</tr>
 					</thead>
 					<tbody>
 					';
 
-    echo "<form method='POST' id='form_states_tbl'>";
+    //echo "<form method='POST' id='form_states_tbl'>";
 
         foreach( $result as $One_Set)
         {
@@ -74,9 +74,14 @@
 
 
 
-            echo 	'<td>
-                        <input type="button" value="Запуск" onclick="Exec_AJAX( \'monitor.php?url_for_mon='. $One_Set[1] .'\' , \'\' , \'#div_result\' )">
-                    </td>';
+            echo 	"<td>";
+            echo    '<input 
+                            type="button"
+                            value="Запуск"
+                            onclick="'.
+                              "Exec_AJAX( 'monitor.php?url_for_mon=". $One_Set[1] ."' , '' , '#div_result' )".
+                              '">';
+            echo 	"</td>";
 
             echo 	"<td>"
 
@@ -85,7 +90,7 @@
             echo "</tr>";
         }
 
-    echo "</form>";
+    //echo "</form>";
 
 
     echo 	"</tbody>";
