@@ -1,0 +1,39 @@
+
+Надо регать сайт ТУТ = https://vk.com/editapp?act=create
+там нужен тлф
+
+
+
+Проверка на strpos аля "vk.com/wall="
+
+выводить аяксом теги строк в таблицу!!!!!
+
+
+У тега tbody будет уникальный id
+голова выводится сразу, а сами строки только через аякс
+
+
+
+Сделать папку "results"
+В ней будут файлы с результатами.
+
+Выводить ссылку на только что созданный файл на старте работы (что бы чел мог скачать)
+
+
+
+если файл существует - експлодить строки и выводить в начале таблицы
+
+
+
+
+=============
+
+Все ссылки что нарыл про вк апи
+https://github.com/blohinn/simple-php-vk-auth
+https://github.com/blohinn/vk-groups-backup
+https://vk.com/editapp?act=create
+https://vk.com/dev/wall.getById?params[posts]=-193812347_9049&params[extended]=0&params[copy_history_depth]=2&params[v]=5.120
+https://qna.habr.com/q/504919
+
+
+123
