@@ -65,19 +65,31 @@
 		{
 			$this->db->close();
 		}
-		
 
 
         /**
          * Вывести последнюю ошибку mysqli
-         * TODO: Добавить возможность возвращения bool, без Echo.
+         * @param bool $need_bool - Возвращать значение или просто сделать echo
+         * @return bool или ничего
          */
-		public function Get_error( )
+		public function Get_error( $need_bool = false )
 		{
 			if ( $this->db->errno != 0 )
-				echo "Get_error => (№" . $this->db->errno . ") " . $this->db->error;
+			{
+                if($need_bool)
+                    return true;
+
+                echo "Get_error => (№" . $this->db->errno . ") " . $this->db->error;
+            }
 			else
-				echo "Get_error => Ошибок нет";
+			{
+                if($need_bool)
+                    return false;
+
+                echo "Get_error => Ошибок нет";
+            }
+
+
 		}
 		
 		

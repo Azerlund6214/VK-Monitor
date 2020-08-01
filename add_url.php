@@ -36,18 +36,28 @@
 
 
     # TODO: Тут будет куча проверок
+    #  Как минимум strstr(wall...)
+
 
 
     $sql = "INSERT INTO curent_states ( post_url )
                     VALUES(  '".$url."' )";
 
 
-    //echo "<br>".$sql; exit();
+    if ($debug_mode) echo "<br>Выполнено => $sql";
 
-    if ($debug_mode) echo "<br>Пишем в лог => $sql";
-    //$DBC->Exec($sql);
+    $DBC->Exec($sql);
 
 
+    if( $DBC -> Get_error(true) )
+    {
+        echo "<br>При добавлении произошла ошибка";
+        echo "<br>";
+        $DBC -> Get_error();
+        exit ("<br> Exit ");
+    }
+
+    echo "<br>Строка успешно добавлена";
 
 
 
