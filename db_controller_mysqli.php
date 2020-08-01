@@ -107,11 +107,13 @@
 			#print_r("Select вернул ". $result->num_rows ." строк.");
 
             # В этом месте будет отлов ошибки запроса
-			
+
+            //$this-> Get_error();
+
 			switch( $fetch_type )
 			{
 				case "all":    return $result -> fetch_all();  break;
-				case "assoc": return  $result -> fetch_assoc(); break;
+				case "assoc": return  $result-> fetch_assoc(); break;
 				
 				default: exit("Невалидный fetch_type");
 			}
