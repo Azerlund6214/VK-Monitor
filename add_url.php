@@ -19,6 +19,14 @@
     require_once( "db_controller_mysqli.php" );
     require_once( "SF_CLASS.php" );
 
+
+    #####
+
+    if( ! isset($_POST['url_for_add']) )
+        exit("Нет get параметра url_for_add");
+
+    $url = $_POST['url_for_add'];
+
     #####
 
     $DBC = new DB_Controller();
@@ -29,19 +37,19 @@
     #####
 
 
-    if( ! isset($_POST['url_for_add']) )
-        exit("Нет get параметра url_for_add");
-
-    $url = $_POST['url_for_add'];
 
 
-    # TODO: Тут будет куча проверок
+
+    # TODO: Тут будет куча проверок на валидность ссылки
     #  Как минимум strstr(wall...)
+    #  попробовать получить ответы в заголовках, возможно у битых ссылок будет 301
+
 
 
 
     $sql = "INSERT INTO curent_states ( post_url )
                     VALUES(  '".$url."' )";
+    # TODO: Тут дыра в безопасности
 
 
     if ($debug_mode) echo "<br>Выполнено => $sql";

@@ -35,6 +35,13 @@
 
     #####
 
+    if( ! isset($_GET['test']) )
+        exit("Нет get параметра url_for_add");
+
+    $url = $_GET['test'];
+    exit("123");
+    #####
+
     $DBC = new DB_Controller();
     $DBC -> Connect( $db_host, $db_user , $db_pass );
     $DBC -> Select_db( $db_name );

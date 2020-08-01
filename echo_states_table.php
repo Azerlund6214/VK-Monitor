@@ -53,7 +53,6 @@
 						<tr >
 							<td><strong>id</strong></td>
 							<td><strong>Ссылка</strong></td>
-							<td><strong>Статус</strong></td>
 							<td><strong>Интервал</strong></td>
 							<td><strong>Время добавки</strong></td>
 							<td><strong>Последнее обн.</strong></td>
@@ -66,38 +65,41 @@
 					<tbody>
 					';
 
-    foreach( $result as $One_Set)
-    {
-        echo "<tr>";
+    echo "<form method='POST' id='form_states_tbl'>";
 
-        echo 	"<td>". $One_Set[0] ."</td>";
-        echo 	"<td>". $One_Set[1] ."</td>";
-        echo 	"<td>". $One_Set[2] ."</td>";
-        echo 	"<td>". $One_Set[3] ."</td>";
-        echo 	"<td>". $One_Set[4] ."</td>";
-        echo 	"<td>". $One_Set[5] ."</td>";
-        echo 	"<td>". $One_Set[6] ."</td>";
-        echo 	"<td>". $One_Set[7] ."</td>";
+        foreach( $result as $One_Set)
+        {
+            echo "<tr>";
+
+            echo 	"<td>". $One_Set[0] ."</td>";
+            echo 	"<td>". $One_Set[1] ."</td>";
+            echo 	"<td>". $One_Set[2] ."</td>";
+            echo 	"<td>". $One_Set[3] ."</td>";
+            echo 	"<td>". $One_Set[4] ."</td>";
+            echo 	"<td>". $One_Set[5] ."</td>";
+            echo 	"<td>". $One_Set[6] ."</td>";
 
 
 
-        echo 	"<td>".
-            '<a href="'.$result['9'].'" target="_blank" download>
-								<span> Для Аякса(статус) </span>	
-							</a>'
-            ."</td>";
+            echo 	'<td>
+                        <input name="test" type="text" value="https://www.vk.com/123" hidden>
+                        <input type="button" value="Запуск" onsubmit=Exec_AJAX( "monitor.php" , "#form_states_tbl" , "#div_result" )>
 
-        echo 	"<td>".
-            '<a href="'.$result['9'].'" target="_blank" download>
-								<span> Для Аякса() </span>	
-							</a>'
-            ."</td>";
+                    </td>';
 
-        echo "</tr>";
-    }
+            echo 	"<td>"
+
+                ."</td>";
+
+            echo "</tr>";
+        }
+
+    echo "</form>";
+
 
     echo 	"</tbody>";
     echo "</table>";
+
 
 
 
